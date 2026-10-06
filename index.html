@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fisioterapia Avançada | Cuidado & Reabilitação</title>
+  <meta name="description"
+    content="Tratamento fisioterapêutico personalizado e humanizado para recuperar seus movimentos e viver sem limitações.">
+
+  <!-- Google Fonts: Inter, Instrument Serif & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- Tailwind Play CDN: preflight stays off so it never overrides the hand-written reset in style.css -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      corePlugins: { preflight: false },
+      theme: {
+        extend: {
+          colors: { cream: '#FAF7F2' },
+          fontFamily: { moove: ['"Plus Jakarta Sans"', '-apple-system', 'sans-serif'] },
+        },
+      },
+    };
+  </script>
+
+  <!-- GSAP 3.12.5 + ScrollTrigger 3.12.5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+
+  <!-- Hero -->
+  <section class="moove-hero" id="inicio">
+
+    <header class="hero-header">
+      <div class="hero-logo">moove.</div>
+
+      <nav class="hero-nav" id="hero-nav" aria-label="Navegação principal">
+        <a href="#inicio">INÍCIO</a>
+        <a href="#especialidades">ESPECIALIDADES</a>
+        <a href="#planos">PLANOS</a>
+        <a href="#contato">CONTATO</a>
+      </nav>
+
+      <button type="button" class="hero-hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="hero-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <div class="hero-main">
+      <div class="hero-text-left">
+        <p>O equilíbrio perfeito entre reabilitação e performance. Descubra o ecossistema completo de saúde da Clínica MOOVE.</p>
+        <a href="#agendamento" class="hero-link">Agendar Consulta</a>
+      </div>
+
+      <div class="hero-center-visual">
+        <div class="hero-circle"></div>
+        <img src="./assets/images/pilates/hero-moove.png" alt="Atendimento em Fisioterapia e Pilates" class="hero-model" />
+      </div>
+
+      <div class="hero-text-right">
+        <h1 class="hero-title">corpo<br>em foco.</h1>
+      </div>
+    </div>
+
+    <footer class="hero-footer">
+      <div class="hero-social">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+          </svg>
+        </a>
+        <a href="#" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+          </svg>
+        </a>
+      </div>
+
+      <div class="hero-location">Sarandi, PR</div>
+    </footer>
+
+  </section>
+
+  <!-- Especialistas (Lanyard Badges): each [data-lanyard] runs its own independent physics instance -->
+  <section class="especialistas-section" id="especialistas" aria-labelledby="especialistas-title">
+    <div class="especialistas-container">
+      <header class="especialistas-header">
+        <span class="especialistas-eyebrow">// Nossa Equipe</span>
+        <h2 class="especialistas-title" id="especialistas-title">Conheça quem cuida de você</h2>
+        <p class="especialistas-subtitle">Fisioterapeutas especializados, prontos para guiar a sua recuperação. Toque no crachá para ver o verso ou arraste para balançá-lo.</p>
+      </header>
+
+      <div class="lanyard-duo">
+
+        <!-- Badge 1: Dr. Leonardo Paz -->
+        <article class="lanyard" data-lanyard data-enter="right" aria-label="Crachá do Dr. Leonardo Paz">
+          <canvas class="lanyard__canvas" data-lanyard-canvas aria-hidden="true"></canvas>
+
+          <div class="lanyard__card" data-lanyard-card role="button" tabindex="0" aria-pressed="false"
+            aria-label="Crachá do Dr. Leonardo Paz. Arraste para balançar, toque para virar.">
+            <div class="lanyard__clip" aria-hidden="true"></div>
+
+            <div class="lanyard__inner" data-lanyard-inner>
+              <div class="lanyard__face lanyard__face--front">
+                <div class="badge-front">
+                  <svg class="badge-front__orn badge-front__orn--a" viewBox="0 0 200 200" aria-hidden="true"><use href="#lyd-ornament" width="200" height="200"></use></svg>
+                  <svg class="badge-front__orn badge-front__orn--b" viewBox="0 0 200 200" aria-hidden="true"><use href="#lyd-ornament" width="200" height="200"></use></svg>
+                  <svg class="badge-front__arrow" viewBox="0 0 20 200" aria-hidden="true"><use href="#lyd-arrow" width="20" height="200"></use></svg>
+                  <div class="badge-front__text">
+                    <p class="badge-front__title">Conheça seu <em>especialista</em></p>
+                    <p class="badge-front__hint">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M22 14a8 8 0 0 1-8 8"></path>
+                        <path d="M18 11v-1a2 2 0 0 0-2-2a2 2 0 0 0-2 2"></path>
+                        <path d="M14 10V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1"></path>
+                        <path d="M10 9.5V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v10"></path>
+                        <path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path>
+                      </svg>
+                      Toque ou arraste para girar
+                    </p>
+                  </div>
+                  <div class="badge-front__brand">
+                    <span class="badge-front__logo">moove.</span>
+                    <span class="badge-front__place">Sarandi · PR</span>
+                  </div>
+                </div>
+                <span class="lanyard__slot" aria-hidden="true"></span>
+                <span class="lanyard__shade" aria-hidden="true"></span>
+              </div>
+
+              <div class="lanyard__face lanyard__face--back">
+                <div class="badge-back">
+                  <div class="badge-back__photo" data-initials="LP">
+                    <img src="./assets/images/pilates/lanyard-leonardo.jpg" alt="Dr. Leonardo Paz" draggable="false" loading="lazy" onerror="this.remove()">
+                  </div>
+                  <div class="badge-back__body">
+                    <h3 class="badge-back__name">Dr. Leonardo Paz</h3>
+                    <p class="badge-back__role">Fisioterapeuta</p>
+                    <ul class="badge-back__meta">
+                      <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path>
+                          <path d="m9 12 2 2 4-4"></path>
+                        </svg>
+                        <span>CREFITO: 406899-F</span>
+                      </li>
+                      <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                        </svg>
+                        <span>@fisioleopaz</span>
+                      </li>
+                    </ul>
+                    <p class="badge-back__label">Especialidades</p>
+                    <ul class="badge-back__tags">
+                      <li>Traumato-ortopedia</li>
+                      <li>Desportiva</li>
+                      <li>Saúde e Estética Injetável</li>
+                    </ul>
+                  </div>
+                  <div class="badge-back__band">
+                    <span class="badge-back__logo">moove.</span>
+                    <span class="badge-back__place">Sarandi · PR</span>
+                  </div>
+                </div>
+                <span class="lanyard__slot" aria-hidden="true"></span>
+                <span class="lanyard__shade" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="lanyard__flip" data-lanyard-flip aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"></path>
+              <path d="M21 3v5h-5"></path>
+              <path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"></path>
+              <path d="M3 21v-5h5"></path>
+            </svg>
+            <span data-lanyard-flip-label>Ver verso</span>
+          </button>
+        </article>
+
+        <!-- Badge 2: Dra. Lorena Santos (enters from the other side and runs its draught out of phase) -->
+        <article class="lanyard" data-lanyard data-enter="left" data-phase="3.7" aria-label="Crachá da Dra. Lorena Santos">
+          <canvas class="lanyard__canvas" data-lanyard-canvas aria-hidden="true"></canvas>
+
+          <div class="lanyard__card" data-lanyard-card role="button" tabindex="0" aria-pressed="false"
+            aria-label="Crachá da Dra. Lorena Santos. Arraste para balançar, toque para virar.">
+            <div class="lanyard__clip" aria-hidden="true"></div>
+
+            <div class="lanyard__inner" data-lanyard-inner>
+              <div class="lanyard__face lanyard__face--front">
+                <div class="badge-front">
+                  <svg class="badge-front__orn badge-front__orn--a" viewBox="0 0 200 200" aria-hidden="true"><use href="#lyd-ornament" width="200" height="200"></use></svg>
+                  <svg class="badge-front__orn badge-front__orn--b" viewBox="0 0 200 200" aria-hidden="true"><use href="#lyd-ornament" width="200" height="200"></use></svg>
+                  <svg class="badge-front__arrow" viewBox="0 0 20 200" aria-hidden="true"><use href="#lyd-arrow" width="20" height="200"></use></svg>
+                  <div class="badge-front__text">
+                    <p class="badge-front__title">Conheça seu <em>especialista</em></p>
+                    <p class="badge-front__hint">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M22 14a8 8 0 0 1-8 8"></path>
+                        <path d="M18 11v-1a2 2 0 0 0-2-2a2 2 0 0 0-2 2"></path>
+                        <path d="M14 10V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1"></path>
+                        <path d="M10 9.5V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v10"></path>
+                        <path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path>
+                      </svg>
+                      Toque ou arraste para girar
+                    </p>
+                  </div>
+                  <div class="badge-front__brand">
+                    <span class="badge-front__logo">moove.</span>
+                    <span class="badge-front__place">Sarandi · PR</span>
+                  </div>
+                </div>
+                <span class="lanyard__slot" aria-hidden="true"></span>
+                <span class="lanyard__shade" aria-hidden="true"></span>
+              </div>
+
+              <div class="lanyard__face lanyard__face--back">
+                <div class="badge-back">
+                  <div class="badge-back__photo" data-initials="LS">
+                    <img src="./assets/images/pilates/lanyard-lorena.jpg" alt="Dra. Lorena Santos" draggable="false" loading="lazy" onerror="this.remove()">
+                  </div>
+                  <div class="badge-back__body">
+                    <h3 class="badge-back__name">Dra. Lorena Santos</h3>
+                    <p class="badge-back__role">Fisioterapeuta</p>
+                    <ul class="badge-back__meta">
+                      <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path>
+                          <path d="m9 12 2 2 4-4"></path>
+                        </svg>
+                        <span>CREFITO: 379263-F</span>
+                      </li>
+                      <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                        </svg>
+                        <span>@lorenab.fisio</span>
+                      </li>
+                    </ul>
+                    <p class="badge-back__label">Especialidades</p>
+                    <ul class="badge-back__tags">
+                      <li>Fisioterapia Pélvica</li>
+                    </ul>
+                  </div>
+                  <div class="badge-back__band">
+                    <span class="badge-back__logo">moove.</span>
+                    <span class="badge-back__place">Sarandi · PR</span>
+                  </div>
+                </div>
+                <span class="lanyard__slot" aria-hidden="true"></span>
+                <span class="lanyard__shade" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="lanyard__flip" data-lanyard-flip aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"></path>
+              <path d="M21 3v5h-5"></path>
+              <path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"></path>
+              <path d="M3 21v-5h5"></path>
+            </svg>
+            <span data-lanyard-flip-label>Ver verso</span>
+          </button>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Ecossistema de Especialidades (Pinned Scroll Stack) -->
+  <div class="method-block" id="especialidades">
+
+    <section class="curiosity-reel">
+      <h2 class="curiosity-reel-title">Nossos Serviços</h2>
+    </section>
+
+    <section class="team-scroll" data-effect="method-steps-stack">
+      <div class="team-scroll-inner">
+
+        <div class="team-index">
+          <span class="team-index-number">5</span><span>Nossos Serviços</span>
+        </div>
+
+        <div class="team-counter" aria-hidden="true">
+          <span class="team-counter-track">
+            <span>01</span>
+            <span>02</span>
+            <span>03</span>
+            <span>04</span>
+            <span>05</span>
+          </span>
+        </div>
+
+        <div class="team-stack">
+          <article class="team-card">
+            <img src="./assets/images/pilates/servico-pilates.jpg" alt="Pilates" referrerpolicy="no-referrer">
+          </article>
+          <article class="team-card">
+            <img src="./assets/images/pilates/servico-fisioterapia.jpg" alt="Fisioterapia Especializada" referrerpolicy="no-referrer">
+          </article>
+          <article class="team-card">
+            <img src="./assets/images/pilates/servico-musculacao.jpg" alt="Musculação Clínica" referrerpolicy="no-referrer">
+          </article>
+          <article class="team-card">
+            <img src="./assets/images/pilates/servico-terapias.jpg" alt="Terapias Manuais" referrerpolicy="no-referrer">
+          </article>
+          <article class="team-card">
+            <img src="./assets/images/pilates/servico-estetica.jpg" alt="Estética Integrada" referrerpolicy="no-referrer">
+          </article>
+        </div>
+
+        <div class="team-info">
+          <div class="team-description">
+            <h3 class="team-desc-title">Pilates</h3>
+            <p>O equilíbrio perfeito entre força e flexibilidade. Trabalhamos a consciência corporal e o movimento fluido para prevenir lesões, tratar dores e devolver a autonomia ao seu corpo.</p>
+          </div>
+          <div class="team-description">
+            <h3 class="team-desc-title">Fisioterapia Especializada</h3>
+            <p>Reabilitação de alta precisão. Utilizamos recursos avançados como Eletroterapia, Dry Needling e Ventosaterapia para uma recuperação rápida, segura e eficaz de lesões e dores agudas.</p>
+          </div>
+          <div class="team-description">
+            <h3 class="team-desc-title">Musculação Clínica</h3>
+            <p>Treinamento seguro e guiado individualmente por especialistas. Focado no ganho de força, condicionamento e estabilidade articular, respeitando sempre a biomecânica do seu corpo.</p>
+          </div>
+          <div class="team-description">
+            <h3 class="team-desc-title">Terapias Manuais</h3>
+            <p>O poder do toque aliado à ciência para o seu bem-estar. Técnicas como Liberação Miofascial e Massagem Relaxante eliminam tensões profundas e aceleram a recuperação muscular.</p>
+          </div>
+          <div class="team-description">
+            <h3 class="team-desc-title">Estética Integrada</h3>
+            <p>O cuidado que reflete na sua autoestima. Tratamentos corporais e faciais, como Drenagem Linfática e Limpeza de Pele, realizados com a máxima segurança clínica e conforto.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Dinâmica da Aula de Pilates (Solutions Grid) -->
+  <section class="pilates-steps-section" id="passo-a-passo">
+    <div class="pilates-steps-container">
+      <header class="pilates-section-header">
+        <div class="section-title-wrapper">
+          <hr class="title-line">
+          <h2 class="pilates-section-title">A Dinâmica da Nossa <span class="text-wine">Aula de Pilates</span></h2>
+          <hr class="title-line">
+        </div>
+        <p class="pilates-section-subtitle">
+          Um método desenhado para o seu corpo. Turmas reduzidas de até 5 pessoas e 50 minutos de dedicação exclusiva à sua postura, força e flexibilidade.
+        </p>
+      </header>
+
+      <div class="pilates-steps-grid">
+        <div class="pilates-cards">
+          <!-- Card 01 -->
+          <article class="pilates-card card-step-01">
+            <div class="pilates-card-top">
+              <div class="pilates-card-head">
+                <span class="pilates-badge">// 01</span>
+                <img src="assets/images/pilates/icone-aquecimento.jpg" alt="Ícone Aquecimento" class="w-12 h-12 rounded-full object-cover shrink-0" />
+              </div>
+              <h3 class="pilates-card-title">Preparação e Aquecimento</h3>
+            </div>
+            <p class="pilates-card-description">
+              A aula inicia preparando o seu corpo para o movimento. O foco é ativar a musculatura principal e aumentar a mobilidade articular nos primeiros 10 minutos.
+            </p>
+            <div class="pilates-card-footer">
+              <span class="pilates-brand">// FOCO E ATIVAÇÃO</span>
+            </div>
+          </article>
+
+          <!-- Card 02 -->
+          <article class="pilates-card card-step-02">
+            <div class="pilates-card-top">
+              <div class="pilates-card-head">
+                <span class="pilates-badge">// 02</span>
+                <img src="assets/images/pilates/icone-postura.jpg" alt="Ícone Postura" class="w-12 h-12 rounded-full object-cover shrink-0" />
+              </div>
+              <h3 class="pilates-card-title">Execução e Correção Postural</h3>
+            </div>
+            <p class="pilates-card-description">
+              Combinamos exercícios no solo (Mat) e rodízio em aparelhos como Reformer, Cadillac e Chair. Durante toda a prática, o instrutor corrige minuciosamente cada movimento para evitar lesões e maximizar a força.
+            </p>
+            <div class="pilates-card-footer">
+              <span class="pilates-brand">// FORÇA E EQUILÍBRIO</span>
+            </div>
+          </article>
+
+          <!-- Card 03 -->
+          <article class="pilates-card card-step-03">
+            <div class="pilates-card-top">
+              <div class="pilates-card-head">
+                <span class="pilates-badge">// 03</span>
+                <img src="assets/images/pilates/icone-relaxamento.jpg" alt="Ícone Relaxamento" class="w-12 h-12 rounded-full object-cover shrink-0" />
+              </div>
+              <h3 class="pilates-card-title">Alongamento e Relaxamento</h3>
+            </div>
+            <p class="pilates-card-description">
+              Finalizamos a sessão promovendo o alívio de tensões. O alongamento focado ajuda na recuperação muscular, devolvendo a flexibilidade e o bem-estar ao seu corpo.
+            </p>
+            <div class="pilates-card-footer">
+              <span class="pilates-brand">// RECUPERAÇÃO</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- Image Card -->
+        <div class="pilates-photo-wrapper">
+          <img src="./assets/images/pilates/passo-a-passo.jpg" alt="Dinâmica da aula de Pilates" class="pilates-photo">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Aula Experimental Gratuita -->
+  <section class="experimental-class" id="aula-experimental">
+    <div class="experimental-container">
+      <div class="experimental-content">
+        <h2 class="experimental-title">Faça uma Aula de Pilates Gratuita</h2>
+        <p class="experimental-subtitle">A oportunidade perfeita para conhecer nosso espaço, entender a metodologia dos instrutores e sentir no seu corpo os benefícios da prática. 100% sem compromisso.</p>
+
+        <div class="experimental-actions">
+          <a href="#agendamento" class="btn-primary">Agendar Aula Experimental</a>
+        </div>
+
+        <p class="experimental-note">*Inclui rápida avaliação postural. Lembre-se de vir com roupas leves e confortáveis.</p>
+
+        <ul class="experimental-stats">
+          <li class="experimental-stat">
+            <span class="experimental-stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </span>
+            <span class="experimental-stat-text">30 a 50 min</span>
+          </li>
+          <li class="experimental-stat">
+            <span class="experimental-stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"></path>
+                <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle>
+              </svg>
+            </span>
+            <span class="experimental-stat-text">Zero Custo</span>
+          </li>
+          <li class="experimental-stat">
+            <span class="experimental-stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+              </svg>
+            </span>
+            <span class="experimental-stat-text">Sob Medida</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="experimental-collage">
+        <span class="collage-shape shape-1" aria-hidden="true"></span>
+        <span class="collage-shape shape-2" aria-hidden="true"></span>
+        <span class="collage-shape shape-3" aria-hidden="true"></span>
+
+        <img src="./assets/images/pilates/experimental-1.jpg" alt="Aula de Pilates 1" class="collage-img img-1">
+        <img src="./assets/images/pilates/experimental-2.jpg" alt="Aula de Pilates 2" class="collage-img img-2">
+        <img src="./assets/images/pilates/experimental-3.jpg" alt="Aula de Pilates 3" class="collage-img img-3">
+      </div>
+    </div>
+  </section>
+
+  <!-- Planos de Pilates (Pricing) -->
+  <section class="pricing-section" id="planos">
+    <div class="pricing-container">
+      <header class="pricing-header">
+        <h2 class="pricing-title">Nossos Planos de Pilates</h2>
+        <p class="pricing-subtitle">Escolha a frequência ideal para a sua rotina. Quanto maior a sua fidelidade com a saúde, melhor o seu investimento.</p>
+
+        <div class="pricing-toggle" role="group" aria-label="Período do plano">
+          <button type="button" class="pricing-toggle-btn active" data-period="mensal" aria-pressed="true">Mensal</button>
+          <button type="button" class="pricing-toggle-btn" data-period="trimestral" aria-pressed="false">Trimestral</button>
+          <button type="button" class="pricing-toggle-btn" data-period="semestral" aria-pressed="false">Semestral</button>
+          <button type="button" class="pricing-toggle-btn" data-period="anual" aria-pressed="false">Anual</button>
+        </div>
+      </header>
+
+      <div class="pricing-grid">
+        <!-- Card 1 -->
+        <article class="pricing-card">
+          <h3 class="pricing-card-title">1x na Semana</h3>
+          <div class="pricing-price">
+            <span class="price-value" data-tier="1x">R$ 190</span><span class="price-suffix">/mês</span>
+          </div>
+          <ul class="pricing-benefits">
+            <li>
+              <svg class="pricing-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Manutenção da postura</span>
+            </li>
+            <li>
+              <svg class="pricing-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Alívio de tensões</span>
+            </li>
+            <li>
+              <svg class="pricing-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Acesso aos aparelhos</span>
+            </li>
+          </ul>
+          <a href="#agendamento" class="pricing-cta">Agendar 1x na Semana</a>
+        </article>
+
+        <!-- Card 2 (Featured) -->
+        <article class="pricing-card pricing-card--featured">
+          <span class="pricing-badge">Mais Popular</span>
+          <h3 class="pricing-card-title">2x na Semana</h3>
+          <div class="pricing-price">
+            <span class="price-value" data-tier="2x">R$ 270</span><span class="price-suffix">/mês</span>
+          </div>
+          <ul class="pricing-benefits">
+            <li>
+              <svg class="pricing-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Evolução contínua</span>
+            </li>
+            <li>
+              <svg class="pricing-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Ganho de força</span>
+            </li>
+            <li>
+              <svg class="pricing-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Resultados acelerados</span>
+            </li>
+          </ul>
+          <a href="#agendamento" class="pricing-cta">Agendar 2x na Semana</a>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="pricing-card">
+          <h3 class="pricing-card-title">3x na Semana</h3>
+          <div class="pricing-price">
+            <span class="price-value" data-tier="3x">R$ 375</span><span class="price-suffix">/mês</span>
+          </div>
+          <ul class="pricing-benefits">
+            <li>
+              <svg class="pricing-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Transformação completa</span>
+            </li>
+            <li>
+              <svg class="pricing-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Condicionamento avançado</span>
+            </li>
+            <li>
+              <svg class="pricing-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Máxima flexibilidade</span>
+            </li>
+          </ul>
+          <a href="#agendamento" class="pricing-cta">Agendar 3x na Semana</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Avaliações do Google: cards are rendered from reviewsData in script.js.
+       z-index matches the other cream sections so the fixed cinematic footer never shows through. -->
+  <section id="avaliacoes" class="relative z-[5] bg-cream px-4 py-20 sm:px-6 lg:py-28" aria-labelledby="avaliacoes-title">
+    <div class="mx-auto max-w-6xl">
+      <h2 id="avaliacoes-title" class="mb-12 text-center font-moove text-[clamp(2rem,4.5vw,3.25rem)] font-extrabold leading-[1.05] tracking-[-0.04em] text-[#111] [text-wrap:balance] lg:mb-16">O que nossos clientes falam sobre nós:</h2>
+
+      <div class="grid items-center gap-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-12">
+
+        <div class="flex flex-col items-center gap-3 text-center">
+          <p class="font-moove text-2xl font-extrabold tracking-[0.02em] text-[#111]">EXCELENTE</p>
+          <div class="flex items-center gap-2">
+            <span class="font-moove text-[1.75rem] font-medium leading-none tracking-[-0.02em] text-gray-700" aria-hidden="true">5,0</span>
+            <div class="flex gap-1" role="img" aria-label="Avaliação 5 de 5 estrelas">
+              <svg class="h-7 w-7 text-[#FBBC04]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+              <svg class="h-7 w-7 text-[#FBBC04]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+              <svg class="h-7 w-7 text-[#FBBC04]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+              <svg class="h-7 w-7 text-[#FBBC04]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+              <svg class="h-7 w-7 text-[#FBBC04]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+            </div>
+          </div>
+          <svg class="mt-3 h-8 w-auto" viewBox="0 0 272 92" role="img" aria-label="Google">
+            <path fill="#EA4335" d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"></path>
+            <path fill="#FBBC05" d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"></path>
+            <path fill="#4285F4" d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z"></path>
+            <path fill="#34A853" d="M225 3v65h-9.5V3h9.5z"></path>
+            <path fill="#EA4335" d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z"></path>
+            <path fill="#4285F4" d="M35.29 41.41V32H67c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C16.32 69.35.36 53.89.36 34.91.36 15.93 16.32.47 35.3.47c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.49-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.1-11.65l-22.49.01z"></path>
+          </svg>
+        </div>
+
+        <!-- Mobile: arrows live in the track's 44px side padding and the gap is wider than it, so the centered card
+             fills the space between them and neighbours (and their shadows) never peek under an arrow.
+             Max width = 320px card + padding. -->
+        <div class="relative mx-auto w-full min-w-0 max-w-[408px] md:max-w-none">
+          <button type="button" data-reviews-prev aria-label="Avaliações anteriores" aria-controls="reviews-track"
+            class="absolute left-1 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-solid border-black/10 bg-white text-[#111] shadow-md transition hover:shadow-lg disabled:pointer-events-none disabled:opacity-30 md:left-0 md:h-11 md:w-11 md:-translate-x-1/2">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+          </button>
+
+          <div id="reviews-track" data-reviews-track role="region" aria-label="Avaliações de clientes no Google" tabindex="0"
+            class="flex snap-x snap-mandatory items-start gap-16 overflow-x-auto px-11 py-4 outline-none md:scroll-px-1 md:gap-5 md:px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"></div>
+
+          <button type="button" data-reviews-next aria-label="Próximas avaliações" aria-controls="reviews-track"
+            class="absolute right-1 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-solid border-black/10 bg-white text-[#111] shadow-md transition hover:shadow-lg disabled:pointer-events-none disabled:opacity-30 md:right-0 md:h-11 md:w-11 md:translate-x-1/2">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Unidades: scroll-down trigger that uncovers the cinematic footer -->
+  <section class="footer-reveal-intro" id="contato">
+    <h2 class="scroll-reveal-text">Nossas Unidades em Sarandi</h2>
+    <div class="scroll-reveal-line" aria-hidden="true"></div>
+  </section>
+
+  <!-- Cinematic Footer (curtain reveal): the fixed footer only paints inside this clipped wrapper -->
+  <div class="cinematic-curtain">
+    <footer class="cinematic-footer">
+
+      <div class="footer-aurora" aria-hidden="true"></div>
+      <div class="footer-bg-grid" aria-hidden="true"></div>
+
+      <div class="footer-giant-bg-text" aria-hidden="true">MOOVE</div>
+
+      <!-- Diagonal marquee: both groups must stay identical for the -50% loop to be seamless -->
+      <div class="footer-marquee">
+        <div class="footer-marquee-track">
+          <div class="footer-marquee-group">
+            <span>Pilates Avançado</span><span class="footer-marquee-star">✦</span>
+            <span>Fisioterapia Especializada</span><span class="footer-marquee-star footer-marquee-star--soft">✦</span>
+            <span>Reabilitação</span><span class="footer-marquee-star">✦</span>
+            <span>Musculação Clínica</span><span class="footer-marquee-star footer-marquee-star--soft">✦</span>
+            <span>Pilates Avançado</span><span class="footer-marquee-star">✦</span>
+            <span>Fisioterapia Especializada</span><span class="footer-marquee-star footer-marquee-star--soft">✦</span>
+            <span>Reabilitação</span><span class="footer-marquee-star">✦</span>
+            <span>Musculação Clínica</span><span class="footer-marquee-star footer-marquee-star--soft">✦</span>
+          </div>
+          <div class="footer-marquee-group" aria-hidden="true">
+            <span>Pilates Avançado</span><span class="footer-marquee-star">✦</span>
+            <span>Fisioterapia Especializada</span><span class="footer-marquee-star footer-marquee-star--soft">✦</span>
+            <span>Reabilitação</span><span class="footer-marquee-star">✦</span>
+            <span>Musculação Clínica</span><span class="footer-marquee-star footer-marquee-star--soft">✦</span>
+            <span>Pilates Avançado</span><span class="footer-marquee-star">✦</span>
+            <span>Fisioterapia Especializada</span><span class="footer-marquee-star footer-marquee-star--soft">✦</span>
+            <span>Reabilitação</span><span class="footer-marquee-star">✦</span>
+            <span>Musculação Clínica</span><span class="footer-marquee-star footer-marquee-star--soft">✦</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-main">
+        <header class="footer-intro mx-auto mb-12 max-w-2xl">
+          <h2 class="footer-heading footer-text-glow">Escolha a clínica mais próxima de você</h2>
+        </header>
+
+        <!-- WhatsApp numbers are placeholders: replace 5544900000001 / 5544900000002 with each unit's real number -->
+        <div class="footer-locations flex w-full flex-wrap justify-center gap-6 md:gap-10">
+          <article class="footer-location-card flex w-full max-w-[380px] flex-col gap-5 rounded-[2rem] bg-white p-4 shadow-xl shadow-black/5 hover:shadow-black/10 sm:w-[380px]">
+            <div class="card-map-preview card-map-preview--cuiaba h-56 rounded-2xl">
+              <img src="./assets/images/pilates/mapa-cuiaba.jpg" alt="Mapa Unidade Av. Cuiabá" class="card-map-img" loading="lazy">
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <h3 class="footer-location-title">Unidade Av. Cuiabá</h3>
+              <p class="footer-location-address">Av. Cuiabá, 1050 - Sala 2, Sarandi - PR</p>
+            </div>
+
+            <div class="footer-location-actions mt-auto">
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Cuiab%C3%A1%2C%201050%20-%20Sala%202%2C%20Sarandi%20-%20PR" target="_blank" rel="noopener noreferrer" class="footer-glass-pill footer-location-btn" data-magnetic="0.15">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"></path>
+                  <path d="M15 5.764v15"></path>
+                  <path d="M9 3.236v15"></path>
+                </svg>
+                Ver no Google Maps
+                <svg class="footer-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path>
+                </svg>
+              </a>
+              <a href="https://wa.me/5544900000001?text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20Unidade%20Av.%20Cuiab%C3%A1." target="_blank" rel="noopener noreferrer" class="footer-whatsapp-btn bg-[#25D366] text-white shadow-lg shadow-[#25D366]/30 hover:bg-[#1ebd57] hover:shadow-[#1ebd57]/40" data-magnetic="0.15">
+                WhatsApp - Unidade Cuiabá
+              </a>
+            </div>
+          </article>
+
+          <article class="footer-location-card flex w-full max-w-[380px] flex-col gap-5 rounded-[2rem] bg-white p-4 shadow-xl shadow-black/5 hover:shadow-black/10 sm:w-[380px]">
+            <div class="card-map-preview card-map-preview--centro h-56 rounded-2xl">
+              <img src="./assets/images/pilates/mapa-centro.jpg" alt="Mapa Unidade Centro" class="card-map-img" loading="lazy">
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <h3 class="footer-location-title">Unidade Centro</h3>
+              <p class="footer-location-address">Rua José Munhoz, 509, Sarandi - PR</p>
+            </div>
+
+            <div class="footer-location-actions mt-auto">
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Jos%C3%A9%20Munhoz%2C%20509%2C%20Sarandi%20-%20PR" target="_blank" rel="noopener noreferrer" class="footer-glass-pill footer-location-btn" data-magnetic="0.15">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"></path>
+                  <path d="M15 5.764v15"></path>
+                  <path d="M9 3.236v15"></path>
+                </svg>
+                Ver no Google Maps
+                <svg class="footer-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path>
+                </svg>
+              </a>
+              <a href="https://wa.me/5544900000002?text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20Unidade%20Centro." target="_blank" rel="noopener noreferrer" class="footer-whatsapp-btn bg-[#25D366] text-white shadow-lg shadow-[#25D366]/30 hover:bg-[#1ebd57] hover:shadow-[#1ebd57]/40" data-magnetic="0.15">
+                WhatsApp - Unidade Centro
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 Clínica MOOVE. Todos os direitos reservados.</p>
+
+        <div class="footer-glass-pill footer-badge">
+          <span class="footer-badge-label">Feito com</span>
+          <svg class="footer-heart" viewBox="0 0 24 24" fill="currentColor" aria-label="amor" role="img">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+          </svg>
+          <span class="footer-badge-label">por</span>
+          <span class="footer-badge-brand">Clínica MOOVE</span>
+        </div>
+
+        <button type="button" class="footer-glass-pill footer-top-btn" aria-label="Voltar ao topo" data-magnetic>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m5 12 7-7 7 7"></path>
+            <path d="M12 19V5"></path>
+          </svg>
+        </button>
+      </div>
+
+    </footer>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
