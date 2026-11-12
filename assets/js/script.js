@@ -162,30 +162,43 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.rect(0, 0, length, width);
       ctx.clip();
       ctx.textBaseline = 'middle';
-      const scriptFont = 'italic 400 ' + Math.round(width * 0.62) + 'px ' + SCRIPT;
-      const labelFont = '800 ' + Math.round(width * 0.32) + 'px ' + DISPLAY;
-      ctx.font = scriptFont;
-      const scriptW = ctx.measureText(opts.text).width;
-      ctx.font = labelFont;
-      const labelW = ctx.measureText(opts.label).width;
-      const gap = width * 0.6;
-      let x = width * 0.4;
-      let flip = 1;
+
+      // The first stretch sits in the top fade, so the phrase has to fit in what remains.
+      const room = Math.max(width * 3.4, length - width * 2 - 96);
+      let scriptSize = Math.round(width * 0.5);
+      let labelSize = Math.round(width * 0.3);
+      const minScript = Math.max(8, Math.round(width * 0.3));
+      const minLabel = Math.max(7, Math.round(width * 0.2));
+      let scriptW = 0;
+      let labelW = 0;
+      const labelText = opts.label ? '- ' + opts.label : '';
+      for (;;) {
+        ctx.font = 'italic 400 ' + scriptSize + 'px ' + SCRIPT;
+        scriptW = ctx.measureText(opts.text).width;
+        ctx.font = '800 ' + labelSize + 'px ' + DISPLAY;
+        labelW = labelText ? ctx.measureText(labelText).width : 0;
+        if (scriptW + labelW + width * 0.45 <= room || scriptSize <= minScript) break;
+        scriptSize -= 1;
+        labelSize = Math.max(minLabel, labelSize - 1);
+      }
+      const scriptFont = 'italic 400 ' + scriptSize + 'px ' + SCRIPT;
+      const labelFont = '800 ' + labelSize + 'px ' + DISPLAY;
+      const gap = width * 0.4;
+      // Start below the fade so "corpo em foco - JENIFER RODRIGUES" is the part you can read.
+      let x = width * 2 + 72;
       while (x < length) {
-        // a mandala too big for the strap, so only an arc of it shows
-        ctx.globalAlpha = 0.55;
-        drawMandala(ctx, x + width * 1.3, width * (0.5 + flip * 0.28), width * 1.35);
-        x += width * 2.8;
         ctx.globalAlpha = 0.95;
         ctx.font = scriptFont;
         ctx.fillText(opts.text, x, width * 0.52);
-        x += scriptW + gap;
-        if (opts.label) {
+        x += scriptW + gap * 0.6;
+        if (labelText) {
           ctx.font = labelFont;
-          ctx.fillText('-  ' + opts.label + '  -', x, width * 0.53);
-          x += labelW + ctx.measureText('-    -').width + gap;
+          ctx.fillText(labelText, x, width * 0.53);
+          x += labelW + gap;
         }
-        flip = -flip;
+        ctx.globalAlpha = 0.4;
+        drawMandala(ctx, x + width * 0.45, width * 0.5, width * 0.8);
+        x += width * 1.35;
       }
       ctx.restore();
     }
@@ -358,12 +371,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const arm = ringR * 2 + clipH + ch * 0.55; // ring to the card's centre of mass
       this.geo = { cw, ch, ringR, clipH, sw, lowLen, arm };
 
-      const style = this.root.style;
-      style.setProperty('--lyd-cw', cw + 'px');
-      style.setProperty('--lyd-ch', ch + 'px');
-      style.setProperty('--lyd-ring', ringR + 'px');
-      style.setProperty('--lyd-clip', clipH + 'px');
-      style.setProperty('--lyd-s', (cw / 240).toFixed(4));
+      const hosts = [this.root];
+      if (this.root.parentElement?.classList.contains('lanyard-viewport')) {
+        hosts.push(this.root.parentElement);
+      }
+      for (const host of hosts) {
+        const style = host.style;
+        style.setProperty('--lyd-cw', cw + 'px');
+        style.setProperty('--lyd-ch', ch + 'px');
+        style.setProperty('--lyd-ring', ringR + 'px');
+        style.setProperty('--lyd-clip', clipH + 'px');
+        style.setProperty('--lyd-s', (cw / 240).toFixed(4));
+      }
     }
 
     add(x, y, w) {
@@ -399,8 +418,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const cx = W / 2;
       const spread = Math.min(W * 0.16, cw * 0.55);
       const top = -sw * 2;
-      // hang the buckle so the whole card fits, but never above a sixth of the frame
-      const bY = Math.max(H * 0.16, Math.min(H * 0.42, H - (lowLen + ringR * 2 + clipH + ch) - 28));
+      // Sit the card near the stage floor so the cropped viewport shows tip + card with no dead space
+      const bY = Math.max(H * 0.12, H - (lowLen + ringR * 2 + clipH + ch) - 10);
 
       const aL = this.add(cx - spread, top, 0);
       this.iB = this.add(cx, bY, 1.4);
@@ -658,120 +677,72 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 /**
- * Ecossistema de Especialidades — pinned card stack (GSAP 3.12.5 + ScrollTrigger 3.12.5)
- * Cards share one grid cell and travel along one diagonal: the active card slides out to the top-left
- * while the next slides in from the bottom-right by the same vector, like a diagonal scroll.
- * The oversized counter and the active description are scrubbed on the same timeline.
+ * Tratamentos — curved numbered wheel (Brewery "From Grain to Glass" via GSAP ScrollTrigger)
+ * Sticky stage + scrubbed rotation around a dashed rim. Falls back to the static grid when
+ * reduced motion is preferred or GSAP is unavailable.
  */
-function setupPinnedStack(stackSection) {
-  const cards = gsap.utils.toArray(stackSection.querySelectorAll('.team-card'));
-  const texts = gsap.utils.toArray(stackSection.querySelectorAll('.team-description'));
-  const counterTrack = stackSection.querySelector('.team-counter-track');
-  const stack = stackSection.querySelector('.team-stack');
-  const steps = cards.length;
-  if (steps < 2 || !stack) return;
+function setupTratamentosWheel(section) {
+  const rim = section.querySelector('.tt__rim');
+  const stations = gsap.utils.toArray(section.querySelectorAll('.tt__station'));
+  if (!rim || stations.length < 2) return;
 
-  const HOLD = 0.5;
-  const TRANSITION = 1;
-  // Slightly under one card so the incoming card's corner overlaps the outgoing one
-  const DIAGONAL_STEP = 0.92;
-  const stepX = () => stack.offsetWidth * DIAGONAL_STEP;
-  const stepY = () => stack.offsetHeight * DIAGONAL_STEP;
-  const stepStart = (k) => HOLD + k * (TRANSITION + HOLD);
-  const stepMidpoints = Array.from({ length: steps - 1 }, (_, k) => stepStart(k) + TRANSITION / 2);
+  const mm = gsap.matchMedia();
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    section.setAttribute('data-wheel', '');
+    const step = () => parseFloat(getComputedStyle(section).getPropertyValue('--tt-step')) || 20;
 
-  cards.forEach((card, i) => gsap.set(card, { zIndex: i + 1 }));
-  gsap.set(cards[0], { opacity: 1 });
-  gsap.set(texts[0], { autoAlpha: 1 });
+    // Seed starting angles so station 01 sits at the top before the first scrub
+    gsap.set(rim, { rotation: 0 });
+    stations.forEach((station, i) => gsap.set(station, { rotation: i * step() }));
 
-  let activeIndex = -1;
-  const setActive = (index) => {
-    if (index === activeIndex) return;
-    activeIndex = index;
-    cards.forEach((card, i) => {
-      card.classList.toggle('is-active', i === index);
-      card.setAttribute('aria-hidden', i === index ? 'false' : 'true');
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        id: 'tratamentos-wheel',
+        trigger: section,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 0.6,
+        invalidateOnRefresh: true,
+      },
     });
-    texts.forEach((text, i) => {
-      text.classList.toggle('is-active', i === index);
-      text.setAttribute('aria-hidden', i === index ? 'false' : 'true');
-    });
-  };
-  setActive(0);
 
-  const tl = gsap.timeline({
-    defaults: { ease: 'power1.inOut', duration: TRANSITION },
-    scrollTrigger: {
-      trigger: stackSection,
-      pin: true,
-      scrub: 0.65,
-      start: 'top top',
-      end: () => '+=' + Math.round(window.innerHeight * (steps - 1) * 1.1),
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-    },
-    onUpdate: () => {
-      const time = tl.time();
-      setActive(stepMidpoints.filter((mid) => time >= mid).length);
-    },
+    for (let k = 1; k < stations.length; k++) {
+      const at = (k - 1) * 1.5 + 0.3;
+      const vars = (angle) => ({ rotation: angle, duration: 1, ease: 'power2.inOut' });
+
+      if (k === 1) {
+        timeline.fromTo(rim, { rotation: 0 }, vars(() => -step()), at);
+        stations.forEach((station, i) => {
+          timeline.fromTo(
+            station,
+            { rotation: () => i * step() },
+            vars(() => (i - 1) * step()),
+            at
+          );
+        });
+      } else {
+        timeline.to(rim, vars(() => -k * step()), at);
+        stations.forEach((station, i) => {
+          timeline.to(station, vars(() => (i - k) * step()), at);
+        });
+      }
+    }
+
+    timeline.to({}, { duration: 0.3 });
+
+    return () => {
+      section.removeAttribute('data-wheel');
+      gsap.set([rim, ...stations], { clearProps: 'transform' });
+    };
   });
-
-  for (let k = 0; k < steps - 1; k++) {
-    const at = stepStart(k);
-
-    // Same ease, duration and vector for both cards keeps the gap between them constant
-    tl.to(cards[k], { x: () => -stepX(), y: () => -stepY() }, at);
-    tl.fromTo(cards[k + 1],
-      { x: () => stepX(), y: () => stepY() },
-      { x: 0, y: 0 },
-      at);
-
-    tl.to(cards[k], { opacity: 0, duration: TRANSITION * 0.6, ease: 'power1.in' }, at + TRANSITION * 0.4);
-    tl.fromTo(cards[k + 1],
-      { opacity: 0 },
-      { opacity: 1, duration: TRANSITION * 0.6, ease: 'power1.out' },
-      at);
-
-    if (counterTrack) {
-      tl.to(counterTrack, { yPercent: -(100 / steps) * (k + 1) }, at);
-    }
-
-    if (texts[k] && texts[k + 1]) {
-      tl.to(texts[k], { autoAlpha: 0, y: -24, duration: TRANSITION * 0.45 }, at);
-      tl.fromTo(texts[k + 1],
-        { autoAlpha: 0, y: 24 },
-        { autoAlpha: 1, y: 0, duration: TRANSITION * 0.45 },
-        at + TRANSITION * 0.55);
-    }
-  }
-
-  // Trailing hold so the last card rests before the pin releases
-  tl.to({}, { duration: HOLD });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   gsap.registerPlugin(ScrollTrigger);
 
-  const reelTitle = document.querySelector('.curiosity-reel-title');
-  if (reelTitle) {
-    gsap.fromTo(reelTitle,
-      { autoAlpha: 0, y: 35 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.curiosity-reel',
-          start: 'top 85%',
-          end: 'top 15%',
-          scrub: 0.6,
-        },
-      });
-  }
-
-  const stackSection = document.querySelector('[data-effect="method-steps-stack"]');
-  if (stackSection) setupPinnedStack(stackSection);
+  const tratamentos = document.querySelector('.tratamentos-section');
+  if (tratamentos) setupTratamentosWheel(tratamentos);
 
   window.addEventListener('load', () => ScrollTrigger.refresh());
   if (document.fonts && document.fonts.ready) {
@@ -859,11 +830,11 @@ document.addEventListener('DOMContentLoaded', () => {
 const reviewsData = [
   { name: 'Larissa Zobole', date: '4 meses atrás', avatar: 'assets/images/pilates/larissa.jpg', text: 'Frequentar essa escola de pilates foi uma das melhores coisas que fiz por mim 🤍 Além de toda a qualidade das aulas, o ambiente é acolhedor, leve e faz a gente realmente se sentir bem.' },
   { name: 'Lucas Matheus Mello', date: 'um ano atrás', initial: 'L', color: 'bg-teal-600', text: 'Sem sombras de dúvidas a melhor clínica de pilates/fisioterapia da cidade. Ambiente perfeito, com profissionais capacitados com muita dedicação. Recomendo muito!' },
-  { name: 'Sandra Fedrigo', date: '4 meses atrás', initial: 'S', color: 'bg-teal-700', text: 'Quero deixar aqui meu carinho e agradecimento à Clínica Moove Pilates e Fisioterapia em Sarandi! Mais do que um lugar para fazer pilates, vocês fazem a diferença na vida das pessoas com profissionalismo, atenção e muito cuidado.' },
+  { name: 'Sandra Fedrigo', date: '4 meses atrás', initial: 'S', color: 'bg-teal-700', text: 'Quero deixar aqui meu carinho e agradecimento à clínica de Pilates e Fisioterapia! Mais do que um lugar para fazer pilates, vocês fazem a diferença na vida das pessoas com profissionalismo, atenção e muito cuidado.' },
   { name: 'Willian Carniato', date: 'um ano atrás', avatar: 'assets/images/pilates/willian.jpg', text: 'Os profissionais são bem atenciosos. Gosto muito de ser aluno da clínica. 10/10' },
   { name: 'Lucilena Ferreira de Souza', date: '4 meses atrás', initial: 'L', color: 'bg-indigo-600', text: 'Faço aula na clínica muito bom' },
   { name: 'JSz Comercial', date: 'um ano atrás', avatar: 'assets/images/pilates/jsz.jpg', text: 'Pessoal atencioso, os equipamentos são excelentes. Recomendo!' },
-  { name: 'Tamires Vitoria', date: 'um ano atrás', avatar: 'assets/images/pilates/tamires.jpg', text: 'Clínica linda, climatizada e muito confortável. Atendimento ótimo e super prestativo. Sem dúvidas a melhor clínica de Sarandi! Estão de parabéns 👏🏼👏🏼...' },
+  { name: 'Tamires Vitoria', date: 'um ano atrás', avatar: 'assets/images/pilates/tamires.jpg', text: 'Clínica linda, climatizada e muito confortável. Atendimento ótimo e super prestativo. Sem dúvidas a melhor clínica! Estão de parabéns 👏🏼👏🏼...' },
   { name: 'valeria cristina', date: '4 meses atrás', initial: 'v', color: 'bg-orange-600', text: 'Clinica bem equipada e atendimento de qualidade eu amei..' },
   { name: 'Amanda Cristina', date: '4 meses atrás', avatar: 'assets/images/pilates/amanda.jpg', text: 'Tive uma experiência muito boa, profissionais super atenciosos.' },
   { name: 'Sueli Moreira', date: '4 meses atrás', initial: 'S', color: 'bg-slate-700', text: 'Ótimo resultado, atendimento especializado muito bom mesmo 🙏🏼 ...' },
@@ -1031,9 +1002,8 @@ function setupMagnetic(el) {
 }
 
 /**
- * Unidades + Cinematic Footer (GSAP 3.12.5 + ScrollTrigger 3.12.5)
- * The footer is fixed inside a clip-path wrapper (.cinematic-curtain), so it is uncovered as the
- * intro scrolls away. Scrubbed tweens add the giant "MOOVE" parallax and the content reveal.
+ * Location Footer (GSAP 3.12.5 + ScrollTrigger 3.12.5)
+ * Scrubbed tweens add the giant wordmark parallax and the content reveal as the section enters view.
  */
 document.addEventListener('DOMContentLoaded', () => {
   const wrapper = document.querySelector('.cinematic-curtain');
@@ -1049,36 +1019,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   gsap.registerPlugin(ScrollTrigger);
 
-  const introTitle = document.querySelector('.scroll-reveal-text');
   const giantText = wrapper.querySelector('.footer-giant-bg-text');
   const revealItems = wrapper.querySelectorAll('.footer-intro, .footer-locations');
 
   const mm = gsap.matchMedia();
 
-  // "curtain" must mirror the inverse of the static-footer media query in style.css
-  mm.add({
-    curtain: '(min-width: 769px) and (min-height: 841px)',
-    reduceMotion: '(prefers-reduced-motion: reduce)',
-  }, (context) => {
-    const { curtain, reduceMotion } = context.conditions;
-    if (reduceMotion) return;
-
-    if (introTitle) {
-      gsap.fromTo(introTitle,
-        { autoAlpha: 0, y: 35 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: '.footer-reveal-intro',
-            start: 'top 85%',
-            end: 'top 15%',
-            scrub: 0.6,
-          },
-        });
-    }
-
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
     // xPercent keeps the CSS horizontal centering while GSAP owns the transform
     if (giantText) {
       gsap.fromTo(giantText,
@@ -1093,13 +1039,12 @@ document.addEventListener('DOMContentLoaded', () => {
           scrollTrigger: {
             trigger: wrapper,
             start: 'top 80%',
-            end: 'bottom bottom',
+            end: 'top 20%',
             scrub: 1,
           },
         });
     }
 
-    // In static mode the footer is taller than the viewport, so the reveal finishes earlier
     if (revealItems.length) {
       gsap.fromTo(revealItems,
         { y: 50, opacity: 0 },
@@ -1110,8 +1055,8 @@ document.addEventListener('DOMContentLoaded', () => {
           ease: 'power3.out',
           scrollTrigger: {
             trigger: wrapper,
-            start: curtain ? 'top 40%' : 'top 85%',
-            end: curtain ? 'bottom bottom' : 'top 30%',
+            start: 'top 85%',
+            end: 'top 30%',
             scrub: 1,
           },
         });

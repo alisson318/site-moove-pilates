@@ -25,7 +25,11 @@
       corePlugins: { preflight: false },
       theme: {
         extend: {
-          colors: { cream: '#FAF7F2' },
+          colors: {
+            cream: '#669492',
+            brand: '#669492',
+            action: '#55C973',
+          },
           fontFamily: { moove: ['"Plus Jakarta Sans"', '-apple-system', 'sans-serif'] },
         },
       },
@@ -40,16 +44,18 @@
 <body>
 
   <!-- Hero -->
-  <section class="moove-hero" id="inicio">
+  <section class="moove-hero px-6 md:px-12 lg:px-24" id="inicio">
 
     <header class="hero-header">
-      <div class="hero-logo">moove.</div>
+      <a href="#inicio" class="hero-logo" aria-label="Jenifer Rodrigues Fisioterapeuta">
+        <img src="./assets/images/pilates/logo-jenifer.png?v=3" alt="Jenifer Rodrigues Fisioterapeuta" width="320" height="70" />
+      </a>
 
       <nav class="hero-nav" id="hero-nav" aria-label="Navegação principal">
         <a href="#inicio">INÍCIO</a>
         <a href="#especialidades">ESPECIALIDADES</a>
         <a href="#planos">PLANOS</a>
-        <a href="#contato">CONTATO</a>
+        <a href="https://wa.me/5544988257275?text=Ol%C3%A1%21+Gostaria+de+agendar+um+hor%C3%A1rio+na+cl%C3%ADnica." target="_blank" rel="noopener noreferrer">CONTATO</a>
       </nav>
 
       <button type="button" class="hero-hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="hero-nav">
@@ -61,13 +67,15 @@
 
     <div class="hero-main">
       <div class="hero-text-left">
-        <p>O equilíbrio perfeito entre reabilitação e performance. Descubra o ecossistema completo de saúde da Clínica MOOVE.</p>
-        <a href="#agendamento" class="hero-link">Agendar Consulta</a>
+        <p>O equilíbrio perfeito entre reabilitação e performance. Descubra o ecossistema completo de saúde da fisioterapeuta Jenifer Rodrigues.</p>
+        <a href="https://wa.me/5544988257275?text=Ol%C3%A1%21+Gostaria+de+agendar+um+hor%C3%A1rio+na+cl%C3%ADnica." target="_blank" rel="noopener noreferrer" class="hero-link">Agendar Consulta</a>
       </div>
 
       <div class="hero-center-visual">
-        <div class="hero-circle"></div>
-        <img src="./assets/images/pilates/hero-moove.png" alt="Atendimento em Fisioterapia e Pilates" class="hero-model" />
+        <div class="hero-portrait">
+          <div class="hero-circle"></div>
+          <img src="./assets/images/pilates/hero-moove.png" alt="Atendimento em Fisioterapia e Pilates" class="hero-model" />
+        </div>
       </div>
 
       <div class="hero-text-right">
@@ -89,352 +97,255 @@
             <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
           </svg>
         </a>
-        <a href="#" aria-label="WhatsApp">
+        <a href="https://wa.me/5544988257275?text=Ol%C3%A1%21+Gostaria+de+agendar+um+hor%C3%A1rio+na+cl%C3%ADnica." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
           </svg>
         </a>
       </div>
 
-      <div class="hero-location">Sarandi, PR</div>
+      <div class="hero-location">Maringá, PR</div>
     </footer>
 
   </section>
 
-  <!-- Especialistas (Lanyard Badges): each [data-lanyard] runs its own independent physics instance -->
-  <section class="especialistas-section" id="especialistas" aria-labelledby="especialistas-title">
+  <!-- Especialistas: one lanyard badge beside the biography -->
+  <section class="especialistas-section pb-12 md:pb-24" id="especialistas" aria-labelledby="especialistas-title">
     <div class="especialistas-container">
-      <header class="especialistas-header">
-        <span class="especialistas-eyebrow">// Nossa Equipe</span>
-        <h2 class="especialistas-title" id="especialistas-title">Conheça quem cuida de você</h2>
-        <p class="especialistas-subtitle">Fisioterapeutas especializados, prontos para guiar a sua recuperação. Toque no crachá para ver o verso ou arraste para balançá-lo.</p>
-      </header>
+      <div class="especialistas-layout">
 
-      <div class="lanyard-duo">
+        <div class="lanyard-viewport">
+          <article class="lanyard" data-lanyard data-enter="right" data-card-width="400"
+            data-strap-text="corpo em foco" data-strap-label="JENIFER RODRIGUES"
+            aria-label="Crachá da Dra. Jenifer Rodrigues">
+            <canvas class="lanyard__canvas" data-lanyard-canvas aria-hidden="true"></canvas>
 
-        <!-- Badge 1: Dr. Leonardo Paz -->
-        <article class="lanyard" data-lanyard data-enter="right" aria-label="Crachá do Dr. Leonardo Paz">
-          <canvas class="lanyard__canvas" data-lanyard-canvas aria-hidden="true"></canvas>
+            <div class="lanyard__card" data-lanyard-card role="button" tabindex="0" aria-pressed="false"
+              aria-label="Crachá da Dra. Jenifer Rodrigues. Arraste para balançar, toque para virar.">
+              <div class="lanyard__clip" aria-hidden="true"></div>
 
-          <div class="lanyard__card" data-lanyard-card role="button" tabindex="0" aria-pressed="false"
-            aria-label="Crachá do Dr. Leonardo Paz. Arraste para balançar, toque para virar.">
-            <div class="lanyard__clip" aria-hidden="true"></div>
-
-            <div class="lanyard__inner" data-lanyard-inner>
-              <div class="lanyard__face lanyard__face--front">
-                <div class="badge-front">
-                  <svg class="badge-front__orn badge-front__orn--a" viewBox="0 0 200 200" aria-hidden="true"><use href="#lyd-ornament" width="200" height="200"></use></svg>
-                  <svg class="badge-front__orn badge-front__orn--b" viewBox="0 0 200 200" aria-hidden="true"><use href="#lyd-ornament" width="200" height="200"></use></svg>
-                  <svg class="badge-front__arrow" viewBox="0 0 20 200" aria-hidden="true"><use href="#lyd-arrow" width="20" height="200"></use></svg>
-                  <div class="badge-front__text">
-                    <p class="badge-front__title">Conheça seu <em>especialista</em></p>
-                    <p class="badge-front__hint">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M22 14a8 8 0 0 1-8 8"></path>
-                        <path d="M18 11v-1a2 2 0 0 0-2-2a2 2 0 0 0-2 2"></path>
-                        <path d="M14 10V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1"></path>
-                        <path d="M10 9.5V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v10"></path>
-                        <path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path>
-                      </svg>
-                      Toque ou arraste para girar
-                    </p>
+              <div class="lanyard__inner" data-lanyard-inner>
+                <div class="lanyard__face lanyard__face--front">
+                  <div class="badge-back">
+                    <div class="badge-back__photo" data-initials="JR">
+                      <img src="./assets/images/pilates/foto-jenifer-cracha.png" alt="Dra. Jenifer Rodrigues" draggable="false" onerror="this.remove()">
+                    </div>
+                    <div class="badge-back__body">
+                      <h3 class="badge-back__name">Dra. Jenifer Rodrigues</h3>
+                      <p class="badge-back__role">Fisioterapeuta</p>
+                      <ul class="badge-back__meta">
+                        <li>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path>
+                            <path d="m9 12 2 2 4-4"></path>
+                          </svg>
+                          <span>CREFITO: XXXX-F</span>
+                        </li>
+                        <li>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                          </svg>
+                          <span>@jenifer_fisio</span>
+                        </li>
+                      </ul>
+                      <p class="badge-back__label">Especialidades</p>
+                      <ul class="badge-back__tags">
+                        <li>Tratamento Especializado nas Dores de Coluna</li>
+                        <li>Licenciada Low Pressure Fitness</li>
+                        <li>Atendimento Presencial</li>
+                      </ul>
+                    </div>
+                    <div class="badge-back__band">
+                      <span class="badge-back__logo">Jenifer Rodrigues</span>
+                      <span class="badge-back__place">Maringá - PR</span>
+                    </div>
                   </div>
-                  <div class="badge-front__brand">
-                    <span class="badge-front__logo">moove.</span>
-                    <span class="badge-front__place">Sarandi · PR</span>
-                  </div>
+                  <span class="lanyard__slot" aria-hidden="true"></span>
+                  <span class="lanyard__shade" aria-hidden="true"></span>
                 </div>
-                <span class="lanyard__slot" aria-hidden="true"></span>
-                <span class="lanyard__shade" aria-hidden="true"></span>
-              </div>
 
-              <div class="lanyard__face lanyard__face--back">
-                <div class="badge-back">
-                  <div class="badge-back__photo" data-initials="LP">
-                    <img src="./assets/images/pilates/lanyard-leonardo.jpg" alt="Dr. Leonardo Paz" draggable="false" loading="lazy" onerror="this.remove()">
+                <div class="lanyard__face lanyard__face--back">
+                  <div class="badge-logo">
+                    <img src="./assets/images/pilates/logo-jenifer-completa.png" alt="Jenifer Rodrigues Fisioterapeuta" draggable="false">
                   </div>
-                  <div class="badge-back__body">
-                    <h3 class="badge-back__name">Dr. Leonardo Paz</h3>
-                    <p class="badge-back__role">Fisioterapeuta</p>
-                    <ul class="badge-back__meta">
-                      <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                          <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path>
-                          <path d="m9 12 2 2 4-4"></path>
-                        </svg>
-                        <span>CREFITO: 406899-F</span>
-                      </li>
-                      <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-                        </svg>
-                        <span>@fisioleopaz</span>
-                      </li>
-                    </ul>
-                    <p class="badge-back__label">Especialidades</p>
-                    <ul class="badge-back__tags">
-                      <li>Traumato-ortopedia</li>
-                      <li>Desportiva</li>
-                      <li>Saúde e Estética Injetável</li>
-                    </ul>
-                  </div>
-                  <div class="badge-back__band">
-                    <span class="badge-back__logo">moove.</span>
-                    <span class="badge-back__place">Sarandi · PR</span>
-                  </div>
+                  <span class="lanyard__slot" aria-hidden="true"></span>
+                  <span class="lanyard__shade" aria-hidden="true"></span>
                 </div>
-                <span class="lanyard__slot" aria-hidden="true"></span>
-                <span class="lanyard__shade" aria-hidden="true"></span>
               </div>
             </div>
+
+          </article>
+        </div>
+
+        <div class="especialistas-copy">
+          <h2 class="especialistas-title mb-2 text-center text-5xl font-extrabold md:mb-8 md:text-left lg:text-6xl" id="especialistas-title">Conheça quem cuida de você</h2>
+          <p class="especialistas-lead text-center md:text-left">Fisioterapia e Pilates especializados, prontos para guiar a sua recuperação e bem-estar.</p>
+          <div class="especialistas-bio text-center md:text-left">
+            <p>Olá, me chamo Jenifer Rodrigues, sou fisioterapeuta e atuo com o método Pilates há mais de 8 anos. Minha missão é proporcionar uma vida com qualidade e bem-estar para meus alunos e pacientes.</p>
+            <p>Tenho me dedicado continuamente à realização de cursos de Pilates (básico, intermediário e avançado), além de ser certificada em Pilates para gestantes. Estou sempre buscando novos conhecimentos para oferecer o melhor atendimento.</p>
+            <p>Acredito que o movimento é transformador. Através do Pilates, trabalhamos a mente e o corpo, promovendo o alívio de dores degenerativas (como artrose, artrite e fibromialgia), melhorando a flexibilidade, a força muscular e o equilíbrio, além de auxiliar no controle da ansiedade pela respiração.</p>
           </div>
 
-          <button type="button" class="lanyard__flip" data-lanyard-flip aria-pressed="false">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"></path>
-              <path d="M21 3v5h-5"></path>
-              <path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"></path>
-              <path d="M3 21v-5h5"></path>
-            </svg>
-            <span data-lanyard-flip-label>Ver verso</span>
-          </button>
-        </article>
-
-        <!-- Badge 2: Dra. Lorena Santos (enters from the other side and runs its draught out of phase) -->
-        <article class="lanyard" data-lanyard data-enter="left" data-phase="3.7" aria-label="Crachá da Dra. Lorena Santos">
-          <canvas class="lanyard__canvas" data-lanyard-canvas aria-hidden="true"></canvas>
-
-          <div class="lanyard__card" data-lanyard-card role="button" tabindex="0" aria-pressed="false"
-            aria-label="Crachá da Dra. Lorena Santos. Arraste para balançar, toque para virar.">
-            <div class="lanyard__clip" aria-hidden="true"></div>
-
-            <div class="lanyard__inner" data-lanyard-inner>
-              <div class="lanyard__face lanyard__face--front">
-                <div class="badge-front">
-                  <svg class="badge-front__orn badge-front__orn--a" viewBox="0 0 200 200" aria-hidden="true"><use href="#lyd-ornament" width="200" height="200"></use></svg>
-                  <svg class="badge-front__orn badge-front__orn--b" viewBox="0 0 200 200" aria-hidden="true"><use href="#lyd-ornament" width="200" height="200"></use></svg>
-                  <svg class="badge-front__arrow" viewBox="0 0 20 200" aria-hidden="true"><use href="#lyd-arrow" width="20" height="200"></use></svg>
-                  <div class="badge-front__text">
-                    <p class="badge-front__title">Conheça seu <em>especialista</em></p>
-                    <p class="badge-front__hint">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M22 14a8 8 0 0 1-8 8"></path>
-                        <path d="M18 11v-1a2 2 0 0 0-2-2a2 2 0 0 0-2 2"></path>
-                        <path d="M14 10V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1"></path>
-                        <path d="M10 9.5V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v10"></path>
-                        <path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path>
-                      </svg>
-                      Toque ou arraste para girar
-                    </p>
-                  </div>
-                  <div class="badge-front__brand">
-                    <span class="badge-front__logo">moove.</span>
-                    <span class="badge-front__place">Sarandi · PR</span>
-                  </div>
-                </div>
-                <span class="lanyard__slot" aria-hidden="true"></span>
-                <span class="lanyard__shade" aria-hidden="true"></span>
-              </div>
-
-              <div class="lanyard__face lanyard__face--back">
-                <div class="badge-back">
-                  <div class="badge-back__photo" data-initials="LS">
-                    <img src="./assets/images/pilates/lanyard-lorena.jpg" alt="Dra. Lorena Santos" draggable="false" loading="lazy" onerror="this.remove()">
-                  </div>
-                  <div class="badge-back__body">
-                    <h3 class="badge-back__name">Dra. Lorena Santos</h3>
-                    <p class="badge-back__role">Fisioterapeuta</p>
-                    <ul class="badge-back__meta">
-                      <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                          <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path>
-                          <path d="m9 12 2 2 4-4"></path>
-                        </svg>
-                        <span>CREFITO: 379263-F</span>
-                      </li>
-                      <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-                        </svg>
-                        <span>@lorenab.fisio</span>
-                      </li>
-                    </ul>
-                    <p class="badge-back__label">Especialidades</p>
-                    <ul class="badge-back__tags">
-                      <li>Fisioterapia Pélvica</li>
-                    </ul>
-                  </div>
-                  <div class="badge-back__band">
-                    <span class="badge-back__logo">moove.</span>
-                    <span class="badge-back__place">Sarandi · PR</span>
-                  </div>
-                </div>
-                <span class="lanyard__slot" aria-hidden="true"></span>
-                <span class="lanyard__shade" aria-hidden="true"></span>
-              </div>
-            </div>
+          <div class="especialistas-cta flex justify-center md:justify-start">
+            <a href="https://wa.me/5544988257275?text=Ol%C3%A1%21+Gostaria+de+agendar+um+hor%C3%A1rio+na+cl%C3%ADnica." target="_blank" rel="noopener noreferrer" class="especialistas-cta-btn group relative inline-flex h-12 w-fit items-center overflow-hidden rounded-full bg-[#111] py-1 pl-6 pr-14 text-sm font-medium leading-none text-white no-underline transition-all duration-500 hover:pl-14 hover:pr-6">
+              <span class="relative z-10">Agendar Consulta</span>
+              <span class="pointer-events-none absolute top-1 right-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-[#111] transition-all duration-500 group-hover:right-[calc(100%-44px)] group-hover:rotate-45" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path>
+                </svg>
+              </span>
+            </a>
           </div>
-
-          <button type="button" class="lanyard__flip" data-lanyard-flip aria-pressed="false">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"></path>
-              <path d="M21 3v5h-5"></path>
-              <path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"></path>
-              <path d="M3 21v-5h5"></path>
-            </svg>
-            <span data-lanyard-flip-label>Ver verso</span>
-          </button>
-        </article>
+        </div>
 
       </div>
     </div>
   </section>
 
-  <!-- Ecossistema de Especialidades (Pinned Scroll Stack) -->
-  <div class="method-block" id="especialidades">
-
-    <section class="curiosity-reel">
-      <h2 class="curiosity-reel-title">Nossos Serviços</h2>
-    </section>
-
-    <section class="team-scroll" data-effect="method-steps-stack">
-      <div class="team-scroll-inner">
-
-        <div class="team-index">
-          <span class="team-index-number">5</span><span>Nossos Serviços</span>
-        </div>
-
-        <div class="team-counter" aria-hidden="true">
-          <span class="team-counter-track">
-            <span>01</span>
-            <span>02</span>
-            <span>03</span>
-            <span>04</span>
-            <span>05</span>
-          </span>
-        </div>
-
-        <div class="team-stack">
-          <article class="team-card">
-            <img src="./assets/images/pilates/servico-pilates.jpg" alt="Pilates" referrerpolicy="no-referrer">
-          </article>
-          <article class="team-card">
-            <img src="./assets/images/pilates/servico-fisioterapia.jpg" alt="Fisioterapia Especializada" referrerpolicy="no-referrer">
-          </article>
-          <article class="team-card">
-            <img src="./assets/images/pilates/servico-musculacao.jpg" alt="Musculação Clínica" referrerpolicy="no-referrer">
-          </article>
-          <article class="team-card">
-            <img src="./assets/images/pilates/servico-terapias.jpg" alt="Terapias Manuais" referrerpolicy="no-referrer">
-          </article>
-          <article class="team-card">
-            <img src="./assets/images/pilates/servico-estetica.jpg" alt="Estética Integrada" referrerpolicy="no-referrer">
-          </article>
-        </div>
-
-        <div class="team-info">
-          <div class="team-description">
-            <h3 class="team-desc-title">Pilates</h3>
-            <p>O equilíbrio perfeito entre força e flexibilidade. Trabalhamos a consciência corporal e o movimento fluido para prevenir lesões, tratar dores e devolver a autonomia ao seu corpo.</p>
-          </div>
-          <div class="team-description">
-            <h3 class="team-desc-title">Fisioterapia Especializada</h3>
-            <p>Reabilitação de alta precisão. Utilizamos recursos avançados como Eletroterapia, Dry Needling e Ventosaterapia para uma recuperação rápida, segura e eficaz de lesões e dores agudas.</p>
-          </div>
-          <div class="team-description">
-            <h3 class="team-desc-title">Musculação Clínica</h3>
-            <p>Treinamento seguro e guiado individualmente por especialistas. Focado no ganho de força, condicionamento e estabilidade articular, respeitando sempre a biomecânica do seu corpo.</p>
-          </div>
-          <div class="team-description">
-            <h3 class="team-desc-title">Terapias Manuais</h3>
-            <p>O poder do toque aliado à ciência para o seu bem-estar. Técnicas como Liberação Miofascial e Massagem Relaxante eliminam tensões profundas e aceleram a recuperação muscular.</p>
-          </div>
-          <div class="team-description">
-            <h3 class="team-desc-title">Estética Integrada</h3>
-            <p>O cuidado que reflete na sua autoestima. Tratamentos corporais e faciais, como Drenagem Linfática e Limpeza de Pele, realizados com a máxima segurança clínica e conforto.</p>
-          </div>
-        </div>
-
+  <!-- Bridge: pain question + image collage (21st.dev hero-section-9, cleaned) -->
+  <section class="dor-bridge-section pt-16 pb-24 md:pt-48 md:pb-40" id="dor-bridge" aria-labelledby="dor-bridge-title">
+    <div class="dor-bridge-container">
+      <div class="dor-bridge-copy">
+        <h2 class="dor-bridge-title" id="dor-bridge-title">Para quem nosso acompanhamento é indicado?</h2>
+        <p class="dor-bridge-subtitle">Ideal para quem sofre com dores crônicas na coluna, tensões musculares, desgastes articulares (como artrose) ou busca uma reabilitação segura. Adaptamos cada movimento da Fisioterapia e do Pilates para devolver a sua força, flexibilidade e qualidade de vida, independentemente da sua idade.</p>
       </div>
-    </section>
 
-  </div>
+      <div class="dor-bridge-collage" aria-hidden="false">
+        <span class="dor-bridge-blob dor-bridge-blob--a" aria-hidden="true"></span>
+        <span class="dor-bridge-blob dor-bridge-blob--b" aria-hidden="true"></span>
+        <span class="dor-bridge-blob dor-bridge-blob--c" aria-hidden="true"></span>
 
-  <!-- Dinâmica da Aula de Pilates (Solutions Grid) -->
-  <section class="pilates-steps-section" id="passo-a-passo">
-    <div class="pilates-steps-container">
-      <header class="pilates-section-header">
-        <div class="section-title-wrapper">
-          <hr class="title-line">
-          <h2 class="pilates-section-title">A Dinâmica da Nossa <span class="text-wine">Aula de Pilates</span></h2>
-          <hr class="title-line">
-        </div>
-        <p class="pilates-section-subtitle">
-          Um método desenhado para o seu corpo. Turmas reduzidas de até 5 pessoas e 50 minutos de dedicação exclusiva à sua postura, força e flexibilidade.
-        </p>
+        <figure class="dor-bridge-frame dor-bridge-frame--1">
+          <img src="./assets/images/pilates/servico-pilates.jpg" alt="Sessão de Pilates" loading="lazy" width="400" height="400">
+        </figure>
+        <figure class="dor-bridge-frame dor-bridge-frame--2">
+          <img src="./assets/images/pilates/servico-fisioterapia.jpg" alt="Atendimento de fisioterapia" loading="lazy" width="400" height="400">
+        </figure>
+        <figure class="dor-bridge-frame dor-bridge-frame--3">
+          <img src="./assets/images/pilates/servico-terapias.jpg" alt="Terapia e movimento" loading="lazy" width="400" height="400">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tratamentos: curved numbered timeline (21st.dev Brewery "From Grain to Glass") -->
+  <section class="tratamentos-section" id="especialidades" aria-labelledby="tt-title">
+    <div class="tt__stage">
+      <header class="tt__header">
+        <h2 class="tt__title" id="tt-title">
+          <span class="sr-only">Tratamentos</span>
+          <svg class="tt__arc" viewBox="0 0 1000 200" aria-hidden="true">
+            <path id="tt-arc-path" d="M 30 196 Q 500 -40 970 196" fill="none" />
+            <text>
+              <textPath href="#tt-arc-path" startOffset="50%" text-anchor="middle">Tratamentos</textPath>
+            </text>
+          </svg>
+        </h2>
       </header>
 
-      <div class="pilates-steps-grid">
-        <div class="pilates-cards">
-          <!-- Card 01 -->
-          <article class="pilates-card card-step-01">
-            <div class="pilates-card-top">
-              <div class="pilates-card-head">
-                <span class="pilates-badge">// 01</span>
-                <img src="assets/images/pilates/icone-aquecimento.jpg" alt="Ícone Aquecimento" class="w-12 h-12 rounded-full object-cover shrink-0" />
-              </div>
-              <h3 class="pilates-card-title">Preparação e Aquecimento</h3>
-            </div>
-            <p class="pilates-card-description">
-              A aula inicia preparando o seu corpo para o movimento. O foco é ativar a musculatura principal e aumentar a mobilidade articular nos primeiros 10 minutos.
-            </p>
-            <div class="pilates-card-footer">
-              <span class="pilates-brand">// FOCO E ATIVAÇÃO</span>
-            </div>
-          </article>
+      <div class="tt__rim" aria-hidden="true"></div>
 
-          <!-- Card 02 -->
-          <article class="pilates-card card-step-02">
-            <div class="pilates-card-top">
-              <div class="pilates-card-head">
-                <span class="pilates-badge">// 02</span>
-                <img src="assets/images/pilates/icone-postura.jpg" alt="Ícone Postura" class="w-12 h-12 rounded-full object-cover shrink-0" />
-              </div>
-              <h3 class="pilates-card-title">Execução e Correção Postural</h3>
-            </div>
-            <p class="pilates-card-description">
-              Combinamos exercícios no solo (Mat) e rodízio em aparelhos como Reformer, Cadillac e Chair. Durante toda a prática, o instrutor corrige minuciosamente cada movimento para evitar lesões e maximizar a força.
-            </p>
-            <div class="pilates-card-footer">
-              <span class="pilates-brand">// FORÇA E EQUILÍBRIO</span>
-            </div>
-          </article>
+      <ol class="tt__wheel">
+        <li class="tt__station">
+          <p class="tt__num" aria-hidden="true">01</p>
+          <h3 class="tt__tag">Lesões e Prevenções</h3>
+          <p class="tt__text">Pilates previne dores ao fortalecer os músculos, melhorar a postura, aumentar a flexibilidade e promover o equilíbrio corporal.</p>
+          <img class="tt__photo" src="./assets/images/pilates/servico-pilates.jpg" alt="Pilates para prevenção de lesões" loading="lazy" width="400" height="400">
+        </li>
+        <li class="tt__station">
+          <p class="tt__num" aria-hidden="true">02</p>
+          <h3 class="tt__tag">Equilíbrio</h3>
+          <p class="tt__text">Pilates melhora o equilíbrio ao fortalecer os músculos centrais, aprimorar a coordenação motora e aumentar a estabilidade corporal.</p>
+          <img class="tt__photo" src="./assets/images/pilates/servico-fisioterapia.jpg" alt="Pilates para equilíbrio corporal" loading="lazy" width="400" height="400">
+        </li>
+        <li class="tt__station">
+          <p class="tt__num" aria-hidden="true">03</p>
+          <h3 class="tt__tag">Alívio de Dores</h3>
+          <p class="tt__text">Pilates reduz dores ao alongar o corpo, corrigir a postura e fortalecer as áreas enfraquecidas.</p>
+          <img class="tt__photo" src="./assets/images/pilates/servico-musculacao.jpg" alt="Pilates para alívio de dores" loading="lazy" width="400" height="400">
+        </li>
+        <li class="tt__station">
+          <p class="tt__num" aria-hidden="true">04</p>
+          <h3 class="tt__tag">Facilitação do Parto</h3>
+          <p class="tt__text">Pilates facilita o parto ao fortalecer o assoalho pélvico, melhorar a postura e aumentar a flexibilidade.</p>
+          <img class="tt__photo" src="./assets/images/pilates/servico-terapias.jpg" alt="Pilates para gestantes e facilitação do parto" loading="lazy" width="400" height="400">
+        </li>
+        <li class="tt__station">
+          <p class="tt__num" aria-hidden="true">05</p>
+          <h3 class="tt__tag">Melhora da Disposição</h3>
+          <p class="tt__text">Pilates melhora a disposição ao aumentar a energia, aliviar o estresse e fortalecer o corpo.</p>
+          <img class="tt__photo" src="./assets/images/pilates/servico-estetica.jpg" alt="Pilates para disposição e energia" loading="lazy" width="400" height="400">
+        </li>
+        <li class="tt__station">
+          <p class="tt__num" aria-hidden="true">06</p>
+          <h3 class="tt__tag">Diminuir Gordura Localizada</h3>
+          <p class="tt__text">Pilates ajuda a reduzir a gordura localizada ao tonificar músculos e melhorar a circulação.</p>
+          <img class="tt__photo" src="./assets/images/pilates/servico-fisioterapia.jpg" alt="Pilates para tonificação muscular" loading="lazy" width="400" height="400">
+        </li>
+      </ol>
+    </div>
+  </section>
 
-          <!-- Card 03 -->
-          <article class="pilates-card card-step-03">
-            <div class="pilates-card-top">
-              <div class="pilates-card-head">
-                <span class="pilates-badge">// 03</span>
-                <img src="assets/images/pilates/icone-relaxamento.jpg" alt="Ícone Relaxamento" class="w-12 h-12 rounded-full object-cover shrink-0" />
-              </div>
-              <h3 class="pilates-card-title">Alongamento e Relaxamento</h3>
+  <!-- Dinâmica da Aula (Forma Why / collage layout) -->
+  <section class="dinamica-section" id="passo-a-passo">
+    <div class="dinamica-container">
+      <div class="dinamica-layout">
+        <figure class="dinamica-art">
+          <div class="dinamica-art-photos">
+            <div class="dinamica-art-photo dinamica-art-photo--1">
+              <img src="./assets/images/pilates/pilates-1.jpg" alt="Avaliação postural e acompanhamento na clínica" width="1086" height="1448" loading="lazy" decoding="async">
             </div>
-            <p class="pilates-card-description">
-              Finalizamos a sessão promovendo o alívio de tensões. O alongamento focado ajuda na recuperação muscular, devolvendo a flexibilidade e o bem-estar ao seu corpo.
-            </p>
-            <div class="pilates-card-footer">
-              <span class="pilates-brand">// RECUPERAÇÃO</span>
+            <div class="dinamica-art-photo dinamica-art-photo--2">
+              <img src="./assets/images/pilates/pilates-3.jpg" alt="Exercício de Pilates no Cadillac" width="1086" height="1448" loading="lazy" decoding="async">
             </div>
-          </article>
-        </div>
+            <div class="dinamica-art-photo dinamica-art-photo--3">
+              <img src="./assets/images/pilates/passo-a-passo.jpg" alt="Correção postural no Reformer com a instrutora" width="1086" height="1448" loading="lazy" decoding="async">
+            </div>
+            <div class="dinamica-art-photo dinamica-art-photo--4">
+              <img src="./assets/images/pilates/pilates-4.jpg" alt="Momento de alongamento e relaxamento" width="1086" height="1448" loading="lazy" decoding="async">
+            </div>
+          </div>
+        </figure>
 
-        <!-- Image Card -->
-        <div class="pilates-photo-wrapper">
-          <img src="./assets/images/pilates/passo-a-passo.jpg" alt="Dinâmica da aula de Pilates" class="pilates-photo">
+        <div class="dinamica-content">
+          <h2 class="dinamica-title">A Dinâmica da Nossa Aula</h2>
+
+          <div class="dinamica-grid">
+            <article class="dinamica-item">
+              <span class="dinamica-number" aria-hidden="true">01</span>
+              <h3 class="dinamica-item-title">Preparação e Aquecimento</h3>
+              <p class="dinamica-item-text">
+                A aula inicia preparando o seu corpo para o movimento. O foco é ativar a musculatura principal e aumentar a mobilidade articular nos primeiros 10 minutos.
+              </p>
+            </article>
+
+            <article class="dinamica-item">
+              <span class="dinamica-number" aria-hidden="true">02</span>
+              <h3 class="dinamica-item-title">Execução e Correção Postural</h3>
+              <p class="dinamica-item-text">
+                Combinamos exercícios no solo (Mat) e rodízio em aparelhos como Reformer, Cadillac e Chair. Durante toda a prática, o instrutor corrige minuciosamente cada movimento para evitar lesões e maximizar a força.
+              </p>
+            </article>
+
+            <article class="dinamica-item">
+              <span class="dinamica-number" aria-hidden="true">03</span>
+              <h3 class="dinamica-item-title">Alongamento e Relaxamento</h3>
+              <p class="dinamica-item-text">
+                Finalizamos a sessão promovendo o alívio de tensões. O alongamento focado ajuda na recuperação muscular, devolvendo a flexibilidade e o bem-estar ao seu corpo.
+              </p>
+            </article>
+
+            <article class="dinamica-item">
+              <span class="dinamica-number" aria-hidden="true">04</span>
+              <h3 class="dinamica-item-title">Acompanhamento Contínuo</h3>
+              <p class="dinamica-item-text">
+                Monitoramos sua evolução aula a aula, garantindo que você alcance seus objetivos de bem-estar com total segurança e suporte.
+              </p>
+            </article>
+          </div>
         </div>
       </div>
     </div>
@@ -448,7 +359,7 @@
         <p class="experimental-subtitle">A oportunidade perfeita para conhecer nosso espaço, entender a metodologia dos instrutores e sentir no seu corpo os benefícios da prática. 100% sem compromisso.</p>
 
         <div class="experimental-actions">
-          <a href="#agendamento" class="btn-primary">Agendar Aula Experimental</a>
+          <a href="https://wa.me/5544988257275?text=Ol%C3%A1%21+Gostaria+de+agendar+um+hor%C3%A1rio+na+cl%C3%ADnica." target="_blank" rel="noopener noreferrer" class="btn-primary">Agendar Aula Experimental</a>
         </div>
 
         <p class="experimental-note">*Inclui rápida avaliação postural. Lembre-se de vir com roupas leves e confortáveis.</p>
@@ -533,7 +444,7 @@
               <span>Acesso aos aparelhos</span>
             </li>
           </ul>
-          <a href="#agendamento" class="pricing-cta">Agendar 1x na Semana</a>
+          <a href="https://wa.me/5544988257275?text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+o+plano+de+Pilates+1x+na+semana." target="_blank" rel="noopener noreferrer" class="pricing-cta">Agendar 1x na Semana</a>
         </article>
 
         <!-- Card 2 (Featured) -->
@@ -557,7 +468,7 @@
               <span>Resultados acelerados</span>
             </li>
           </ul>
-          <a href="#agendamento" class="pricing-cta">Agendar 2x na Semana</a>
+          <a href="https://wa.me/5544988257275?text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+o+plano+de+Pilates+2x+na+semana." target="_blank" rel="noopener noreferrer" class="pricing-cta">Agendar 2x na Semana</a>
         </article>
 
         <!-- Card 3 -->
@@ -580,7 +491,7 @@
               <span>Máxima flexibilidade</span>
             </li>
           </ul>
-          <a href="#agendamento" class="pricing-cta">Agendar 3x na Semana</a>
+          <a href="https://wa.me/5544988257275?text=Ol%C3%A1%21+Gostaria+de+saber+mais+sobre+o+plano+de+Pilates+3x+na+semana." target="_blank" rel="noopener noreferrer" class="pricing-cta">Agendar 3x na Semana</a>
         </article>
       </div>
     </div>
@@ -638,15 +549,9 @@
     </div>
   </section>
 
-  <!-- Unidades: scroll-down trigger that uncovers the cinematic footer -->
-  <section class="footer-reveal-intro" id="contato">
-    <h2 class="scroll-reveal-text">Nossas Unidades em Sarandi</h2>
-    <div class="scroll-reveal-line" aria-hidden="true"></div>
-  </section>
-
-  <!-- Cinematic Footer (curtain reveal): the fixed footer only paints inside this clipped wrapper -->
-  <div class="cinematic-curtain">
-    <footer class="cinematic-footer">
+  <!-- Location / Onde Estamos + site footer -->
+  <div class="cinematic-curtain w-full max-w-full overflow-x-clip" id="contato">
+    <footer class="cinematic-footer w-full max-w-full overflow-x-clip">
 
       <div class="footer-aurora" aria-hidden="true"></div>
       <div class="footer-bg-grid" aria-hidden="true"></div>
@@ -680,23 +585,22 @@
       </div>
 
       <div class="footer-main">
-        <header class="footer-intro mx-auto mb-12 max-w-2xl">
-          <h2 class="footer-heading footer-text-glow">Escolha a clínica mais próxima de você</h2>
+        <header class="footer-intro mx-auto mb-10 max-w-2xl lg:mb-12">
+          <h2 class="footer-heading footer-text-glow">Onde Estamos</h2>
         </header>
 
-        <!-- WhatsApp numbers are placeholders: replace 5544900000001 / 5544900000002 with each unit's real number -->
-        <div class="footer-locations flex w-full flex-wrap justify-center gap-6 md:gap-10">
-          <article class="footer-location-card flex w-full max-w-[380px] flex-col gap-5 rounded-[2rem] bg-white p-4 shadow-xl shadow-black/5 hover:shadow-black/10 sm:w-[380px]">
-            <div class="card-map-preview card-map-preview--cuiaba h-56 rounded-2xl">
-              <img src="./assets/images/pilates/mapa-cuiaba.jpg" alt="Mapa Unidade Av. Cuiabá" class="card-map-img" loading="lazy">
+        <div class="footer-locations grid w-full min-w-0 grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-10">
+          <article class="footer-location-card flex w-full min-w-0 flex-col gap-5 rounded-[2rem] bg-white p-4 shadow-xl shadow-black/5 hover:shadow-black/10">
+            <div class="card-map-preview card-map-preview--clinic h-56 rounded-2xl">
+              <img src="./assets/images/pilates/mapa-cuiaba.jpg" alt="Mapa da Clínica Jenifer Rodrigues em Maringá" class="card-map-img" loading="lazy">
             </div>
             <div class="flex flex-col gap-1.5">
-              <h3 class="footer-location-title">Unidade Av. Cuiabá</h3>
-              <p class="footer-location-address">Av. Cuiabá, 1050 - Sala 2, Sarandi - PR</p>
+              <h3 class="footer-location-title">Clínica Jenifer Rodrigues</h3>
+              <p class="footer-location-address">R. das Camélias, 326 - Sala 21 - Zona 05, Maringá - PR, 87060-288</p>
             </div>
 
             <div class="footer-location-actions mt-auto">
-              <a href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Cuiab%C3%A1%2C%201050%20-%20Sala%202%2C%20Sarandi%20-%20PR" target="_blank" rel="noopener noreferrer" class="footer-glass-pill footer-location-btn" data-magnetic="0.15">
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=R.%20das%20Cam%C3%A9lias%2C%20326%20-%20Sala%2021%20-%20Zona%2005%2C%20Maring%C3%A1%20-%20PR%2C%2087060-288" target="_blank" rel="noopener noreferrer" class="footer-glass-pill footer-location-btn" data-magnetic="0.15">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"></path>
                   <path d="M15 5.764v15"></path>
@@ -708,44 +612,62 @@
                   <path d="M7 17 17 7"></path>
                 </svg>
               </a>
-              <a href="https://wa.me/5544900000001?text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20Unidade%20Av.%20Cuiab%C3%A1." target="_blank" rel="noopener noreferrer" class="footer-whatsapp-btn bg-[#25D366] text-white shadow-lg shadow-[#25D366]/30 hover:bg-[#1ebd57] hover:shadow-[#1ebd57]/40" data-magnetic="0.15">
-                WhatsApp - Unidade Cuiabá
+              <a href="https://wa.me/5544988257275?text=Ol%C3%A1%21+Gostaria+de+agendar+um+hor%C3%A1rio+na+cl%C3%ADnica." target="_blank" rel="noopener noreferrer" class="footer-whatsapp-btn bg-[#55C973] text-white shadow-lg shadow-[#55C973]/30 hover:bg-[#3FB85E] hover:shadow-[#3FB85E]/40" data-magnetic="0.15">
+                Agendar via WhatsApp
               </a>
             </div>
           </article>
 
-          <article class="footer-location-card flex w-full max-w-[380px] flex-col gap-5 rounded-[2rem] bg-white p-4 shadow-xl shadow-black/5 hover:shadow-black/10 sm:w-[380px]">
-            <div class="card-map-preview card-map-preview--centro h-56 rounded-2xl">
-              <img src="./assets/images/pilates/mapa-centro.jpg" alt="Mapa Unidade Centro" class="card-map-img" loading="lazy">
-            </div>
-            <div class="flex flex-col gap-1.5">
-              <h3 class="footer-location-title">Unidade Centro</h3>
-              <p class="footer-location-address">Rua José Munhoz, 509, Sarandi - PR</p>
-            </div>
+          <aside class="footer-info flex w-full min-w-0 flex-col gap-8 text-[#111]" aria-label="Horários e perguntas frequentes">
+            <section class="footer-info-block">
+              <h3 class="footer-info-heading">Horário de Atendimento</h3>
+              <dl class="footer-hours">
+                <div class="footer-hours-row">
+                  <dt>Seg e Qua</dt>
+                  <dd>07:30 – 20:00</dd>
+                </div>
+                <div class="footer-hours-row">
+                  <dt>Ter</dt>
+                  <dd>07:30 – 20:30</dd>
+                </div>
+                <div class="footer-hours-row">
+                  <dt>Qui</dt>
+                  <dd>07:30 – 19:30</dd>
+                </div>
+                <div class="footer-hours-row">
+                  <dt>Sex</dt>
+                  <dd>07:30 – 10:30</dd>
+                </div>
+                <div class="footer-hours-row">
+                  <dt>Sáb e Dom</dt>
+                  <dd>Fechado</dd>
+                </div>
+              </dl>
+            </section>
 
-            <div class="footer-location-actions mt-auto">
-              <a href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Jos%C3%A9%20Munhoz%2C%20509%2C%20Sarandi%20-%20PR" target="_blank" rel="noopener noreferrer" class="footer-glass-pill footer-location-btn" data-magnetic="0.15">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"></path>
-                  <path d="M15 5.764v15"></path>
-                  <path d="M9 3.236v15"></path>
-                </svg>
-                Ver no Google Maps
-                <svg class="footer-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M7 7h10v10"></path>
-                  <path d="M7 17 17 7"></path>
-                </svg>
-              </a>
-              <a href="https://wa.me/5544900000002?text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20Unidade%20Centro." target="_blank" rel="noopener noreferrer" class="footer-whatsapp-btn bg-[#25D366] text-white shadow-lg shadow-[#25D366]/30 hover:bg-[#1ebd57] hover:shadow-[#1ebd57]/40" data-magnetic="0.15">
-                WhatsApp - Unidade Centro
-              </a>
-            </div>
-          </article>
+            <section class="footer-info-block" aria-labelledby="footer-faq-title">
+              <h3 class="footer-info-heading" id="footer-faq-title">Perguntas Frequentes</h3>
+              <div class="footer-faq">
+                <details class="footer-faq-item">
+                  <summary class="footer-faq-question">Preciso de indicação médica para começar?</summary>
+                  <p class="footer-faq-answer">Não é obrigatório para a maioria dos casos. Se você estiver em reabilitação ou com alguma restrição, traga a orientação do seu médico.</p>
+                </details>
+                <details class="footer-faq-item">
+                  <summary class="footer-faq-question">Qual a duração das sessões?</summary>
+                  <p class="footer-faq-answer">As sessões duram cerca de 50 minutos, com acompanhamento personalizado do início ao fim.</p>
+                </details>
+                <details class="footer-faq-item">
+                  <summary class="footer-faq-question">Vocês aceitam plano de saúde?</summary>
+                  <p class="footer-faq-answer">Atendemos de forma particular. <a href="https://wa.me/5544988257275?text=Ol%C3%A1%21+Gostaria+de+agendar+um+hor%C3%A1rio+na+cl%C3%ADnica." target="_blank" rel="noopener noreferrer" class="footer-info-link">Fale conosco pelo WhatsApp</a> para tirar dúvidas sobre valores e formas de pagamento.</p>
+                </details>
+              </div>
+            </section>
+          </aside>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copyright">© 2026 Clínica MOOVE. Todos os direitos reservados.</p>
+        <p class="footer-copyright">© 2026 Clínica Jenifer Rodrigues. Todos os direitos reservados.</p>
 
         <div class="footer-glass-pill footer-badge">
           <span class="footer-badge-label">Feito com</span>
@@ -753,7 +675,7 @@
             <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
           </svg>
           <span class="footer-badge-label">por</span>
-          <span class="footer-badge-brand">Clínica MOOVE</span>
+          <span class="footer-badge-brand">Clínica Jenifer Rodrigues</span>
         </div>
 
         <button type="button" class="footer-glass-pill footer-top-btn" aria-label="Voltar ao topo" data-magnetic>
