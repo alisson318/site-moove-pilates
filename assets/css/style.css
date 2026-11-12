@@ -1323,8 +1323,8 @@ html, body {
   font-weight: 800;
   line-height: 0.9;
   letter-spacing: -0.04em;
-  color: #ffffff;
-  -webkit-text-fill-color: var(--tt-bg);
+  color: #12362f;
+  -webkit-text-fill-color: #12362f;
   -webkit-text-stroke: max(3px, 0.036em) #ffffff;
   paint-order: stroke fill;
 }
