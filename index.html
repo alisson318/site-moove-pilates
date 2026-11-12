@@ -205,29 +205,43 @@
     </div>
   </section>
 
-  <!-- Bridge: pain question + image collage (21st.dev hero-section-9, cleaned) -->
-  <section class="dor-bridge-section pt-16 pb-24 md:pt-48 md:pb-40" id="dor-bridge" aria-labelledby="dor-bridge-title">
-    <div class="dor-bridge-container">
-      <div class="dor-bridge-copy">
-        <h2 class="dor-bridge-title" id="dor-bridge-title">Para quem nosso acompanhamento é indicado?</h2>
-        <p class="dor-bridge-subtitle">Ideal para quem sofre com dores crônicas na coluna, tensões musculares, desgastes articulares (como artrose) ou busca uma reabilitação segura. Adaptamos cada movimento da Fisioterapia e do Pilates para devolver a sua força, flexibilidade e qualidade de vida, independentemente da sua idade.</p>
+  <!-- Bridge: title / video / mobile text order + one-shot click-to-play -->
+  <section
+    class="dor-bridge-section h-auto min-h-screen py-24 flex flex-col justify-center"
+    id="dor-bridge"
+    aria-labelledby="dor-bridge-title"
+  >
+    <div class="dor-bridge-container grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div class="text-center md:text-left">
+        <h2 class="dor-bridge-title text-4xl md:text-5xl lg:text-6xl font-extrabold" id="dor-bridge-title">
+          Conheça nosso espaço
+        </h2>
+        <p class="dor-bridge-subtitle hidden md:block text-lg lg:text-xl mt-6">
+          Descubra um ambiente moderno e acolhedor, totalmente preparado para a sua reabilitação e bem-estar.
+        </p>
       </div>
 
-      <div class="dor-bridge-collage" aria-hidden="false">
-        <span class="dor-bridge-blob dor-bridge-blob--a" aria-hidden="true"></span>
-        <span class="dor-bridge-blob dor-bridge-blob--b" aria-hidden="true"></span>
-        <span class="dor-bridge-blob dor-bridge-blob--c" aria-hidden="true"></span>
-
-        <figure class="dor-bridge-frame dor-bridge-frame--1">
-          <img src="./assets/images/pilates/servico-pilates.jpg" alt="Sessão de Pilates" loading="lazy" width="400" height="400">
-        </figure>
-        <figure class="dor-bridge-frame dor-bridge-frame--2">
-          <img src="./assets/images/pilates/servico-fisioterapia.jpg" alt="Atendimento de fisioterapia" loading="lazy" width="400" height="400">
-        </figure>
-        <figure class="dor-bridge-frame dor-bridge-frame--3">
-          <img src="./assets/images/pilates/servico-terapias.jpg" alt="Terapia e movimento" loading="lazy" width="400" height="400">
-        </figure>
+      <div
+        class="relative w-full max-w-[320px] aspect-[9/16] mx-auto rounded-3xl overflow-hidden shadow-2xl cursor-pointer group"
+        data-dor-bridge-video
+      >
+        <img
+          src="./assets/images/pilates/thumbnail-video-moove.png"
+          alt="Conheça nosso espaço"
+          class="w-full h-full object-cover"
+        >
+        <div class="absolute inset-0 flex items-center justify-center transition-transform group-hover:scale-110 pointer-events-none">
+          <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-lg">
+            <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 5v14l11-7z"></path>
+            </svg>
+          </div>
+        </div>
       </div>
+
+      <p class="dor-bridge-subtitle block md:hidden text-lg mt-8 text-center md:col-span-2">
+        Descubra um ambiente moderno e acolhedor, totalmente preparado para a sua reabilitação e bem-estar.
+      </p>
     </div>
   </section>
 

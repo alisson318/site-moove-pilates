@@ -751,6 +751,32 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
+ * Dor Bridge — one-shot click-to-play YouTube.
+ * Listener removes itself after the first click so taps on the iframe cannot reload the video.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  const video = document.querySelector('[data-dor-bridge-video]');
+  if (!video) return;
+
+  const playOnce = () => {
+    video.removeEventListener('click', playOnce);
+    video.classList.remove('cursor-pointer', 'group');
+    video.replaceChildren();
+
+    const iframe = document.createElement('iframe');
+    iframe.className = 'w-full h-full border-none';
+    iframe.src =
+      'https://www.youtube.com/embed/Xegang81nN4?autoplay=1&rel=0&modestbranding=1&controls=1';
+    iframe.title = 'Vídeo: conheça nosso espaço';
+    iframe.allow = 'autoplay; encrypted-media; fullscreen';
+    iframe.setAttribute('allowfullscreen', '');
+    video.appendChild(iframe);
+  };
+
+  video.addEventListener('click', playOnce, { once: true });
+});
+
+/**
  * Aula Experimental — plays the CSS entrance animations once the section scrolls into view.
  * Content stays visible without JS because the hidden state is only applied here.
  */
